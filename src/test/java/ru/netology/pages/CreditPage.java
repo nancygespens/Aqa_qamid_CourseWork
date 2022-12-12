@@ -7,10 +7,10 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 
-public class PaymentPage {
+public class CreditPage {
 
     private final String successMsg = "Операция одобрена Банком.";
     private final String bankFailureMsg = "Ошибка! Банк отказал в проведении операции.";
@@ -25,7 +25,7 @@ public class PaymentPage {
     private final String cvcCodeEmptyError = "Поле обязательно для заполнения";
 
 
-    private SelenideElement heading = $(byText("Оплата по карте")).parent().$(".heading");
+    private SelenideElement heading = $(byText("Кредит по данным карты")).parent().$(".heading");
     private SelenideElement cardNumberField = $(byText("Номер карты")).parent().$(".input__control");
     private SelenideElement monthField = $(byText("Месяц")).parent().$(".input__control");
     private SelenideElement yearField = $(byText("Год")).parent().$(".input__control");
@@ -36,7 +36,7 @@ public class PaymentPage {
     private SelenideElement bankFailureNotification = $(byText(bankFailureMsg));
     Integer validDuration = 12;
 
-    public PaymentPage() {
+    public CreditPage() {
         heading.shouldBe(visible);
     }
 
@@ -50,19 +50,19 @@ public class PaymentPage {
     private SelenideElement errorNotificationCvcCode = $(byText(cvcCodeError)).parent().$(".input__sub");
     private SelenideElement errorNotificationEmptyCvcCode = $(byText(cvcCodeEmptyError)).parent().$(".input__sub");
 
-    public PaymentPage makeSuccessfulPayment(DataHelper.InfoForPayByCard info) {
+    public CreditPage makeSuccessfulPayment(DataHelper.InfoForPayByCard info) {
         successfulPayment(info);
-        return new PaymentPage();
+        return new CreditPage();
     }
 
-    public PaymentPage makeDeclinedPayment(DataHelper.InfoForPayByCard info) {
+    public CreditPage makeDeclinedPayment(DataHelper.InfoForPayByCard info) {
         declinedPayment(info);
-        return new PaymentPage();
+        return new CreditPage();
     }
 
-    public PaymentPage makeInvalidPayment(DataHelper.InfoForPayByCard info) {
+    public CreditPage makeInvalidPayment(DataHelper.InfoForPayByCard info) {
         invalidPayment(info);
-        return new PaymentPage();
+        return new CreditPage();
     }
 
     public void successfulPayment(DataHelper.InfoForPayByCard info) {

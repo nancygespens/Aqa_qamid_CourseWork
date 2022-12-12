@@ -1,12 +1,14 @@
 package ru.netology.data;
 
 import com.github.javafaker.Faker;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.Value;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-
 
 public class DataHelper {
 
@@ -15,7 +17,9 @@ public class DataHelper {
     private DataHelper() {
     }
 
-    @Value
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class InfoForPayByCard {
         String cardNumber;
         String month;
@@ -30,6 +34,10 @@ public class DataHelper {
 
     public static String getDeclinedCardNumber() {
         return "5555 6666 7777 8888";
+    }
+
+    public static String getRandomCardNumberValidFormat() {
+        return faker.business().creditCardNumber();
     }
 
     public static String getEmptyCardNumber() {
@@ -64,8 +72,17 @@ public class DataHelper {
         return faker.name().fullName();
     }
 
+    public static String getCardOwnerSpecSymbol() {
+        return faker.name().fullName() + "=-+!@?.,";
+    }
+
     public static String getInvalidCardOwnerByNumber() {
         return faker.name().fullName() + faker.business().creditCardNumber();
+    }
+
+    public static String getInvalidCardOwnerByRus() {
+        Faker fakerOnRus = new Faker(new Locale("ru"));
+        return fakerOnRus.name().fullName();
     }
 
     public static String getEmptyCardOwner() {
@@ -86,5 +103,15 @@ public class DataHelper {
 
     public static InfoForPayByCard getValidInfoForPayByCard() {
         return new InfoForPayByCard(getApprovedCardNumber(), getCurrentMonth(), getCurrentYear(), getValidCardOwner(), getRandomCvcCode());
+    }
+
+    public static String createJSON(InfoForPayByCard info) {
+        return "{\n" +
+                "  \"number\": \"" + info.getCardNumber() + "\",\n" +
+                "  \"year\": \"" + info.getMonth() + "\",\n" +
+                "  \"month\": \"" + info.getYear() + "\",\n" +
+                "  \"holder\": \"" + info.getCardOwner() + "\",\n" +
+                "  \"cvc\": \"" + info.getCvcCode() + "\"\n" +
+                "}";
     }
 }
