@@ -1,4 +1,10 @@
-# Курсовой проект профессии Тестировщик
+# Курсовой проект по модулю «Автоматизация тестирования» для профессии «Инженер по тестированию»
+
+***[Планирование автоматизации](https://github.com/nancygespens/Aqa_qamid_CourseWork/blob/main/Plan.md)***
+
+***[Отчёт о проведенном тестировании](https://github.com/nancygespens/Aqa_qamid_CourseWork/blob/main/documents/Report.md)***
+
+***[Отчёт по итогам автоматизации](https://github.com/nancygespens/Aqa_qamid_CourseWork/blob/main/documents/Summary.md)***
 
 ## Шаги для локального запуска проекта
 
