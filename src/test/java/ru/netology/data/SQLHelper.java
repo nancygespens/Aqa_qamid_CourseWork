@@ -13,10 +13,14 @@ public class SQLHelper {
     private SQLHelper() {
     }
 
+    static String url = System.getProperty("db.url");
+    static String user = System.getProperty("db.user");
+    static String password = System.getProperty("db.password");
+
     @SneakyThrows
     private static Connection getConnMySQL() {
 
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306/app", "app", "pass");
+        return DriverManager.getConnection(url, user, password);
     }
 
     @SneakyThrows
